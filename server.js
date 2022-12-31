@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // points to route files - will create actual files later and will include posts, gets, puts requests
-require("./routes/apiroutes")(app);
-require("./routes/htmlroutes")(app);
+require("./routers/apirouter")(app);
+require("./routers/htmlrouter")(app);
 
 // starts server
 app.listen(PORT, function() {
