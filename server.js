@@ -1,6 +1,7 @@
 // Main server file, will contain middleware
 
 // tells application we are using express server with node
+const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
