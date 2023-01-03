@@ -17,6 +17,9 @@ app.use(express.static("public"));
 // require("./routers/apirouter");
 // require("./routers/htmlrouter");
 
+
+// uses the exported 'app' on line 48 of apirouter.js and line 18 of htmlrouter.js to instinctively know which route to take
+// remember this /api made the use of /api/notes in apirouter.js redundant - switched to just /notes
 app.use('/api', api);
 app.use('/', html);
 
