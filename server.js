@@ -5,14 +5,20 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const api = require('./routers/apirouter.js');
+const html = require('./routers/htmlrouter.js');
+
 // sets up express to parse data with middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
 // points to route files - will create actual files later and will include posts, gets, puts requests
-require("./routers/apirouter")(app);
-require("./routers/htmlrouter")(app);
+// require("./routers/apirouter");
+// require("./routers/htmlrouter");
+
+app.use('/api', api);
+app.use('/', html);
 
 // starts server
 app.listen(PORT, function() {

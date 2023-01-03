@@ -1,12 +1,15 @@
 const fs = require('fs');
 
-module.exports = function(app) {
+const express = require('express');
+const app = express.Router();
+
+// module.exports = function() {
   
 // GETS the written notes
-  app.get('/api/notes', function(req, res) {
-    fs.readFile('./db/db.json', (err, data) => {
+  app.get('/notes', function(req, res) {
+    fs.readFile('db/db.json', (err, data) => {
       if (err) throw err;
-
+      console.log(data);
     //   sends json data
       dbDataJson = JSON.parse(data);
       res.send(dbDataJson);
@@ -14,10 +17,10 @@ module.exports = function(app) {
   });
 
 // SENDS JSON DATA TO SERVER IN /api/notes
-  app.post('/api/notes', function(req, res) {
+  app.post('/notes', function(req, res) {
     const writtenNotes = req.body;
 
-    fs.readFile('./db/db.json', (err, data) => {
+    fs.readFile('db/db.json', (err, data) => {
       if (err) throw err;
 
     //   technically don't have to set this but makes it a lot easier
@@ -33,11 +36,13 @@ module.exports = function(app) {
       });
 
     //   console.log(dbData);
-      stringedData = JSON.stringify(dbData);
-      fs.writeFile('./db/db.json', stringedData, (err, data) => {
+      stringedData = JSON.stringify(dbDataJson);
+      fs.writeFile('db/db.json', stringedData, (err, data) => {
         if (err) throw err;
       });
     });
     res.send("Note posted.");
   });
-};
+// };
+
+module.exports = app;
